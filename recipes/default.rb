@@ -65,9 +65,14 @@ execute 'update homebrew from github' do
   command "sudo -u #{node['current_user']} /usr/local/bin/brew update || true"
 end
 
-execute 'update grails version' do
+execute 'change default grails version' do
   user node['current-user']
   command "cd /usr/local/Cellar && git checkout 9312992 /usr/local/Library/Formula/grails.rb"
+end
+
+execute 'change default thrift version' do
+  user node['current-user']
+  command "cd /usr/local/Cellar && git checkout eccc96b /usr/local/Library/Formula/thrift.rb"
 end
 
 node['homebrewalt']['cask_apps'].each do |app|
